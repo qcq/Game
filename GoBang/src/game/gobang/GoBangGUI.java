@@ -1,0 +1,190 @@
+package game.gobang;
+
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.Box;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+public class GoBangGUI extends JFrame {
+    private JPanel mainframe;
+    private GoBangBoard board;
+    private JPanel control;
+    private GridLayout grid;
+    private BorderLayout border;
+    private JButton start;
+    private JButton end;
+    private JLabel label;
+    private int row;
+    private int column;
+    private Gobang gobang;
+    private MouseAdapter mouselistener;
+    private boolean flag;
+    private boolean ok;
+    private ActionListener actionlistener;
+
+    public GoBangGUI() {
+        this("GoBang Game", 10, 10);
+    }
+
+    public GoBangGUI(String title, int row, int column) {
+        super(title);
+        // this.setUndecorated(true);
+        this.row = row;
+        this.column = column;
+        this.flag = false;
+        this.ok = false;
+        initial();
+        setSize(600, 600);
+        this.setResizable(false);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationByPlatform(true);
+        this.setVisible(true);
+        this.requestFocus();
+    }
+
+    private void initial() {
+        createComponent();
+        layOut();
+        listener();
+    }
+
+    private void createComponent() {
+        mainframe = new JPanel();
+        control = new JPanel();
+        border = new BorderLayout();
+        grid = new GridLayout();
+        start = new JButton("Start");
+        label = new JLabel();
+        gobang = new Gobang(row, column);
+        board = new GoBangBoard(gobang, row, column);
+        end = new JButton("Exit");
+        // gobang.getData()[0][0] = GobangColor.WHITE;
+    }
+
+    private void layOut() {
+        this.getContentPane().add(mainframe);
+        // setBackpicture();
+        // mainframe.setBackground(Color.yellow);
+        mainframe.setLayout(border);
+        mainframe.add(board, BorderLayout.CENTER);
+        // board.setBounds(0, 0, 500, 500);
+        mainframe.add(control, BorderLayout.EAST);
+        Box ve = Box.createVerticalBox();
+        ve.add(start);
+        ve.add(Box.createVerticalStrut(50));
+        end.setSize(start.getWidth(), start.getHeight());
+        ve.add(end);
+        control.add(ve);
+    }
+
+    private void setBackpicture() {
+        ImageIcon a = new ImageIcon("/home/qcq/1.jpg");
+        JLabel p = new JLabel(a);
+        p.setBounds(0, 0, a.getIconWidth(), a.getIconHeight());
+        this.getLayeredPane().add(p, Integer.MIN_VALUE);
+    }
+
+    /*
+     * 判断鼠标落入棋盘窗格的位置索引 (x, y)为当前鼠标的坐标。
+     */
+    private Place judgePlace(int indexx, int indexy, int x, int y, int squre) {
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                if (x >= indexx + j * squre && x <= indexx + (j + 1) * squre && y >= indexy + i * squre
+                        && y <= indexy + (i + 1) * squre) {
+                    return new Place(i, j);
+                }
+            }
+        }
+        return null;
+    }
+
+    private void listener() {
+        mouselistener = new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                int x = e.getX();
+                int y = e.getY();
+                /*
+                 * (25, 10) is a special coordinate. the board draw begins here,
+                 * when the board added to the this JFrame the begin change to
+                 * (25, 10 + 25), However, I do not know why. just keep it;
+                 */
+                if (ok) {
+                    Place temp = judgePlace(25, 10, x, y, board.getSqure());
+                    System.out.println(temp);
+                    if (flag) {
+                        if (!gobang.check(temp.getX(), temp.getY())) {
+                            JOptionPane.showMessageDialog(mainframe, "Change another place");
+                        } else {
+                            gobang.setChess(temp.getX(), temp.getY(), GobangColor.WHITE);
+                            repaint();
+                            if (gobang.isSuccess(new Place(0, 0), new Place(row - 1, column - 1), GobangColor.WHITE)) {
+                                // JOptionPane.showMessageDialog(mainframe, "The
+                                // white player is win");
+                                int choice = JOptionPane.showConfirmDialog(mainframe, "The white player is win",
+                                        "DO you want try again", JOptionPane.YES_NO_OPTION);
+                                if (choice == JOptionPane.YES_OPTION) {
+                                    gobang.initial();
+                                    ok = false;
+                                    repaint();
+                                }
+                            }
+                            flag = false;
+                        }
+
+                    } else {
+                        if (!gobang.check(temp.getX(), temp.getY())) {
+                            JOptionPane.showMessageDialog(mainframe, "Change another place");
+                        } else {
+                            gobang.setChess(temp.getX(), temp.getY(), GobangColor.BLACK);
+                            repaint();
+                            if (gobang.isSuccess(new Place(0, 0), new Place(row - 1, column - 1), GobangColor.BLACK)) {
+                                // JOptionPane.showMessageDialog(mainframe, "The
+                                // black player is win");
+                                int choice = JOptionPane.showConfirmDialog(mainframe, "The black player is win",
+                                        "DO you want try again", JOptionPane.YES_NO_OPTION);
+                                if (choice == JOptionPane.YES_OPTION) {
+                                    gobang.initial();
+                                    ok = false;
+                                    repaint();
+                                }
+                            }
+                            flag = true;
+                        }
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(mainframe, "please start the game");
+                }
+            }
+        };
+        actionlistener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (((JButton) (e.getSource())).getText().equals("Start")) {
+                    ok = true;
+                } else if (((JButton) (e.getSource())).getText().equals("Exit")) {
+                    System.exit(0);
+                }
+            }
+        };
+        board.addMouseListener(mouselistener);
+        start.addActionListener(actionlistener);
+        end.addActionListener(actionlistener);
+    }
+
+    public static void main(String[] args) {
+        GoBangGUI game = new GoBangGUI(null, 20, 20);
+    }
+
+}
