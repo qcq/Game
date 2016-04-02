@@ -1,6 +1,7 @@
 package game;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,11 +10,11 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Random;
 
-import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.Timer;
 
 public class Snake extends JFrame {
@@ -40,6 +41,7 @@ public class Snake extends JFrame {
     private boolean caneat;
     private ActionListener timelistener;
     private int speed;
+    private JTextField score;
 
     /**
      * default set the board to 20 * 10
@@ -99,7 +101,8 @@ public class Snake extends JFrame {
         rand = new Random();
         food = new Place(-1, -1);
         board.setFood(food);
-
+        score = new JTextField();
+        score.setEditable(false);
     }
 
     /**
@@ -111,10 +114,10 @@ public class Snake extends JFrame {
         mainframe.add(control, BorderLayout.NORTH);
         control.setLayout(flow);
         control.add(start);
-        control.add(Box.createHorizontalStrut(50));
+        control.add(score);
         control.add(exit);
-        start.setSize(70, 30);
-        exit.setSize(70, 30);
+        score.setPreferredSize(new Dimension(70, 30));
+        score.setText("0");
         mainframe.add(board, BorderLayout.CENTER);
     }
 
@@ -266,6 +269,7 @@ public class Snake extends JFrame {
             }
             if (caneat) {
                 snakeBody.add(new Place(food.getX(), food.getY()));
+                score.setText(String.valueOf(Integer.valueOf(score.getText()) + 1));
                 food();
             }
         } else {
@@ -277,6 +281,7 @@ public class Snake extends JFrame {
                  * ready for the restart the game.
                  */
                 loadSnakeBody();
+                score.setText("0");
             }
         }
     }
