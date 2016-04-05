@@ -15,6 +15,8 @@ public class LongShape extends Shape {
         data.get(0).setLocation(data.get(0).x - 2, point.y);
         data.get(1).setLocation(data.get(1).x - 1, point.y);
         data.get(3).setLocation(data.get(3).x + 1, point.y);
+        initialLimits();
+        getLimits();
         return true;
     }
 

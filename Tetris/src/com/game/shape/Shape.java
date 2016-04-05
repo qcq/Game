@@ -21,14 +21,14 @@ public abstract class Shape {
         getLimits();
     }
 
-    private void initialLimits() {
+    public void initialLimits() {
         limitLeft = column;
         limitRight = -1;
         limitBelow = -1;
         limitTop = row;
     }
 
-    private void getLimits() {
+    public void getLimits() {
         int sum = 0;
         for (Point item : data) {
             limitLeft = Math.min(limitLeft, item.y);
