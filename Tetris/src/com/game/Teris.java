@@ -143,7 +143,11 @@ public class Teris extends JFrame {
                     time.setDelay(speed);
                     System.out.println(speed);
                 } else if (code == KeyEvent.VK_SPACE && canChange()) {
-                    shape.changeShape();
+                    try {
+                        shape.changeShape();
+                    } catch (Exception e1) {
+                        e1.printStackTrace();
+                    }
                 } else {
                     direction = Direction.NULL;
                 }
@@ -167,21 +171,38 @@ public class Teris extends JFrame {
 
     protected boolean canShiftLeft() {
         shape.ShiftLeft();
-        boolean flag = Utils.hasSamePoint(data);
+        boolean flag = !Utils.hasSamePoint(data);
         shape.ShiftRight();
-        return !flag;
+        return flag;
     }
 
     protected boolean canShiftRight() {
         shape.ShiftRight();
-        boolean flag = Utils.hasSamePoint(data);
+        boolean flag = !Utils.hasSamePoint(data);
         shape.ShiftLeft();
-        return !flag;
+        return flag;
     }
 
     protected boolean canChange() {
-        // TODO Auto-generated method stub
-        return true;
+        try {
+            shape.changeShape();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        boolean flag = !Utils.hasSamePoint(data);
+        for (Point item : shape.getData()) {
+            if (item.x >= row || item.y >= column || item.x < 0 || item.y < 0) {
+                flag = false;
+                System.out.println("Care");
+                break;
+            }
+        }
+        try {
+            shape.unChangeShape();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return flag;
     }
 
     private void move() {
@@ -199,8 +220,7 @@ public class Teris extends JFrame {
         } else {
             time.stop();
             // JOptionPane.showMessageDialog(this, "You Lose! Come on!");
-            int choice = JOptionPane.showConfirmDialog(this, "try again!",
-                    "Message", JOptionPane.YES_NO_OPTION);
+            int choice = JOptionPane.showConfirmDialog(this, "try again!", "Message", JOptionPane.YES_NO_OPTION);
             if (JOptionPane.YES_OPTION == choice) {
                 /**
                  * ready for the restart the game.
@@ -270,8 +290,7 @@ public class Teris extends JFrame {
     }
 
     private void loadShape() {
-        shape = Utils.makeShape(Utils.conertRandToEnum(rand.nextInt(2)), row,
-                column);
+        shape = Utils.makeShape(Utils.conertRandToEnum(rand.nextInt(2)), row, column);
         int shiftToCenter = column / 2 - shape.getCenterOfShape();
         for (int i = 0; i < shiftToCenter; i++) {
             shape.ShiftRight();

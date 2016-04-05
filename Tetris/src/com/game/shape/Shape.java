@@ -97,7 +97,7 @@ public abstract class Shape {
         return centerOfShape;
     }
 
-    abstract public boolean changeShape();
+    abstract public boolean changeShape() throws Exception;
 
-    abstract public boolean unChangeShape();
+    abstract public boolean unChangeShape() throws Exception;
 }
