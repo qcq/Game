@@ -1,4 +1,4 @@
-package com.game.util;
+package com.game.state;
 
 /**
  * this file contains the definition of the direction.

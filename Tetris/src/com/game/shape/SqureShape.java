@@ -3,12 +3,12 @@ package com.game.shape;
 import java.awt.Point;
 import java.util.List;
 
-public class Squre extends Shape {
+public class SqureShape extends Shape {
 
     /*
      * The shape is below: ** **
      */
-    public Squre(List<Point> data, int row, int column) {
+    public SqureShape(List<Point> data, int row, int column) {
         super(data, row, column);
     }
 

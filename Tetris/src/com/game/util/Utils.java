@@ -7,16 +7,15 @@ import java.util.Set;
 
 import com.game.shape.LongShape;
 import com.game.shape.Shape;
-import com.game.shape.ShapeEnum;
-import com.game.shape.ShapesData;
-import com.game.shape.Squre;
+import com.game.shape.SqureShape;
+import com.game.state.ShapeEnum;
 
 public class Utils {
 
     public static Shape makeShape(ShapeEnum shape, int row, int column) {
         switch (shape) {
         case SQURE:
-            return new Squre(ShapesData.makeSqureData(), row, column);
+            return new SqureShape(ShapesData.makeSqureData(), row, column);
         case LONG:
             return new LongShape(ShapesData.makeLongData(), row, column);
         default:

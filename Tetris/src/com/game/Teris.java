@@ -20,7 +20,7 @@ import javax.swing.JTextField;
 import javax.swing.Timer;
 
 import com.game.shape.Shape;
-import com.game.util.Direction;
+import com.game.state.Direction;
 import com.game.util.SameRow;
 import com.game.util.Utils;
 

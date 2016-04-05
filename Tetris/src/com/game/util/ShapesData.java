@@ -1,4 +1,4 @@
-package com.game.shape;
+package com.game.util;
 
 import java.awt.Point;
 import java.util.ArrayList;
