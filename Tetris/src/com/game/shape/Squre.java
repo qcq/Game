@@ -17,4 +17,9 @@ public class Squre extends Shape {
         return true;
     }
 
+    @Override
+    public boolean unChangeShape() {
+        return true;
+    }
+
 }

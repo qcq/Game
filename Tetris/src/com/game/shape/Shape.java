@@ -4,7 +4,7 @@ import java.awt.Point;
 import java.util.List;
 
 public abstract class Shape {
-    private List<Point> data;
+    protected List<Point> data;
     private int limitLeft;
     private int limitRight;
     private int limitBelow;
@@ -98,4 +98,6 @@ public abstract class Shape {
     }
 
     abstract public boolean changeShape();
+
+    abstract public boolean unChangeShape();
 }
