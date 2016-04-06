@@ -20,4 +20,12 @@ public interface ShapeInterface {
     enum REVERSESEVEN implements ShapeInterface {
         RIGHT, DOWN, LEFT, TOP
     }
+
+    enum CHAIR implements ShapeInterface {
+        HORIZONTAL, VERTICAL
+    }
+
+    enum REVERSECHAIR implements ShapeInterface {
+        HORIZONTAL, VERTICAL
+    }
 }

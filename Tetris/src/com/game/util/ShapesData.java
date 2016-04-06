@@ -46,6 +46,20 @@ public class ShapesData {
             data.add(new Point(-2, 0));
             data.add(new Point(-1, 0));
             break;
+        case CHAIR:
+            data = new ArrayList<Point>();
+            data.add(new Point(-3, 0));
+            data.add(new Point(-2, 0));
+            data.add(new Point(-2, 1));
+            data.add(new Point(-1, 1));
+            break;
+        case REVERSECHAIR:
+            data = new ArrayList<Point>();
+            data.add(new Point(-3, 1));
+            data.add(new Point(-2, 1));
+            data.add(new Point(-2, 0));
+            data.add(new Point(-1, 0));
+            break;
         default:
             return null;
         }

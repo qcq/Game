@@ -293,7 +293,7 @@ public class Teris extends JFrame {
     }
 
     public static void main(String[] args) {
-        new Teris("test", 20, 10);
+        new Teris("test", 50, 25);
     }
 
 }
