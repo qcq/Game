@@ -8,6 +8,7 @@ import java.util.Set;
 import com.game.shape.LongShape;
 import com.game.shape.Shape;
 import com.game.shape.SqureShape;
+import com.game.shape.TriangleShape;
 import com.game.state.ShapeEnum;
 
 public class Utils {
@@ -15,9 +16,12 @@ public class Utils {
     public static Shape makeShape(ShapeEnum shape, int row, int column) {
         switch (shape) {
         case SQURE:
-            return new SqureShape(ShapesData.makeSqureData(), row, column);
+            return new SqureShape(ShapesData.makeShapeData(shape), row, column);
         case LONG:
-            return new LongShape(ShapesData.makeLongData(), row, column);
+            return new LongShape(ShapesData.makeShapeData(shape), row, column);
+        case TRIANGLE:
+            return new TriangleShape(ShapesData.makeShapeData(shape), row,
+                    column);
         default:
             return null;
         }
@@ -35,6 +39,8 @@ public class Utils {
             return ShapeEnum.SQURE;
         case 1:
             return ShapeEnum.LONG;
+        case 2:
+            return ShapeEnum.TRIANGLE;
         default:
             return ShapeEnum.SQURE;
         }

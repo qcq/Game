@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.game.shape.SqureShape;
+import com.game.state.ShapeEnum;
 import com.game.util.ShapesData;
 
 public class TestSqure {
@@ -13,7 +14,8 @@ public class TestSqure {
 
     @Before
     public void setUp() throws Exception {
-        squre = new SqureShape(ShapesData.makeSqureData(), 20, 10);
+        squre = new SqureShape(ShapesData.makeShapeData(ShapeEnum.SQURE), 20,
+                10);
         Assert.assertNotNull(squre);
     }
 

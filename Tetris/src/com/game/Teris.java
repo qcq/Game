@@ -220,7 +220,8 @@ public class Teris extends JFrame {
         } else {
             time.stop();
             // JOptionPane.showMessageDialog(this, "You Lose! Come on!");
-            int choice = JOptionPane.showConfirmDialog(this, "try again!", "Message", JOptionPane.YES_NO_OPTION);
+            int choice = JOptionPane.showConfirmDialog(this, "try again!",
+                    "Message", JOptionPane.YES_NO_OPTION);
             if (JOptionPane.YES_OPTION == choice) {
                 /**
                  * ready for the restart the game.
@@ -290,7 +291,8 @@ public class Teris extends JFrame {
     }
 
     private void loadShape() {
-        shape = Utils.makeShape(Utils.conertRandToEnum(rand.nextInt(2)), row, column);
+        shape = Utils.makeShape(Utils.conertRandToEnum(rand.nextInt(3)), row,
+                column);
         int shiftToCenter = column / 2 - shape.getCenterOfShape();
         for (int i = 0; i < shiftToCenter; i++) {
             shape.ShiftRight();

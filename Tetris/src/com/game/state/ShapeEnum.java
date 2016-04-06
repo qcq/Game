@@ -1,5 +1,5 @@
 package com.game.state;
 
 public enum ShapeEnum {
-    SQURE, LONG
+    SQURE, LONG, TRIANGLE
 }
