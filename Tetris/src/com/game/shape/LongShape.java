@@ -18,19 +18,19 @@ public class LongShape extends Shape {
         Point point = data.get(2);
         switch (state) {
         case HORIZONTAL:
-            data.get(0).setLocation(data.get(0).x - 2, point.y);
-            data.get(1).setLocation(data.get(1).x - 1, point.y);
-            data.get(3).setLocation(data.get(3).x + 1, point.y);
+            data.get(0).setLocation(point.x - 2, point.y);
+            data.get(1).setLocation(point.x - 1, point.y);
+            data.get(3).setLocation(point.x + 1, point.y);
             state = LONG.VERTICAL;
             break;
         case VERTICAL:
-            data.get(0).setLocation(point.x, data.get(0).y - 2);
-            data.get(1).setLocation(point.x, data.get(1).y - 1);
-            data.get(3).setLocation(point.x, data.get(3).y + 1);
+            data.get(0).setLocation(point.x, point.y - 2);
+            data.get(1).setLocation(point.x, point.y - 1);
+            data.get(3).setLocation(point.x, point.y + 1);
             state = LONG.HORIZONTAL;
             break;
         default:
-            throw new Exception("sth wrong here");
+            throw new Exception("sth wrong here LongShape");
         }
         initialLimits();
         getLimits();

@@ -15,17 +15,30 @@ public class TriangleShape extends Shape {
 
     @Override
     public boolean changeShape() throws Exception {
+        Point point = data.get(2);
         switch (state) {
         case TOP:
+            data.get(0).setLocation(point.x, point.y + 1);
+            data.get(1).setLocation(point.x - 1, point.y);
+            data.get(3).setLocation(point.x + 1, point.y);
             state = TRIANGLE.RIGHT;
             break;
         case RIGHT:
+            data.get(0).setLocation(point.x + 1, point.y);
+            data.get(1).setLocation(point.x, point.y + 1);
+            data.get(3).setLocation(point.x, point.y - 1);
             state = TRIANGLE.DOWN;
             break;
         case DOWN:
+            data.get(0).setLocation(point.x, point.y - 1);
+            data.get(1).setLocation(point.x + 1, point.y);
+            data.get(3).setLocation(point.x - 1, point.y);
             state = TRIANGLE.LEFT;
             break;
         case LEFT:
+            data.get(0).setLocation(point.x - 1, point.y);
+            data.get(1).setLocation(point.x, point.y - 1);
+            data.get(3).setLocation(point.x, point.y + 1);
             state = TRIANGLE.TOP;
             break;
         default:
@@ -38,7 +51,38 @@ public class TriangleShape extends Shape {
 
     @Override
     public boolean unChangeShape() throws Exception {
-        return false;
+        Point point = data.get(2);
+        switch (state) {
+        case TOP:
+            data.get(0).setLocation(point.x, point.y - 1);
+            data.get(1).setLocation(point.x + 1, point.y);
+            data.get(3).setLocation(point.x - 1, point.y);
+            state = TRIANGLE.LEFT;
+            break;
+        case RIGHT:
+            data.get(0).setLocation(point.x - 1, point.y);
+            data.get(1).setLocation(point.x, point.y - 1);
+            data.get(3).setLocation(point.x, point.y + 1);
+            state = TRIANGLE.TOP;
+            break;
+        case DOWN:
+            data.get(0).setLocation(point.x, point.y + 1);
+            data.get(1).setLocation(point.x - 1, point.y + 1);
+            data.get(3).setLocation(point.x + 1, point.y - 1);
+            state = TRIANGLE.RIGHT;
+            break;
+        case LEFT:
+            data.get(0).setLocation(point.x + 1, point.y);
+            data.get(1).setLocation(point.x, point.y + 1);
+            data.get(3).setLocation(point.x, point.y - 1);
+            state = TRIANGLE.DOWN;
+            break;
+        default:
+            throw new Exception("sth wrong here : TriangleShape");
+        }
+        initialLimits();
+        getLimits();
+        return true;
     }
 
 }

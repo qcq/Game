@@ -19,7 +19,6 @@ import javax.swing.JTextField;
 import javax.swing.Timer;
 
 import com.game.shape.Shape;
-import com.game.state.Direction;
 import com.game.state.ShapeEnum;
 import com.game.util.Enums;
 import com.game.util.SameRow;
@@ -46,7 +45,6 @@ public class Teris extends JFrame {
     private ActionListener timelistener;
     private Timer time;
     private int speed;
-    protected Direction direction;
     private JTextField score;
     private Shape shape;
     private int limitTop;
@@ -125,12 +123,10 @@ public class Teris extends JFrame {
             @Override
             public void keyPressed(KeyEvent e) {
                 int code = e.getKeyCode();
-                if (code == KeyEvent.VK_LEFT && canShiftLeft()) {
-                    direction = Direction.LEFT;
-                    shape.ShiftLeft();
-                } else if (code == KeyEvent.VK_RIGHT && canShiftRight()) {
-                    direction = Direction.RIGHT;
-                    shape.ShiftRight();
+                if (code == KeyEvent.VK_LEFT) {
+                    shiftLeft();
+                } else if (code == KeyEvent.VK_RIGHT) {
+                    shiftRight();
                 } else if (code == KeyEvent.VK_UP) {
                     speed += 100;
                     time.setDelay(speed);
@@ -140,14 +136,9 @@ public class Teris extends JFrame {
                     speed = 0 == speed ? 100 : speed;
                     time.setDelay(speed);
                     System.out.println(speed);
-                } else if (code == KeyEvent.VK_SPACE && canChange()) {
-                    try {
-                        shape.changeShape();
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
-                    }
+                } else if (code == KeyEvent.VK_SPACE) {
+                    changeShape();
                 } else {
-                    direction = Direction.NULL;
                 }
             }
         };
@@ -167,40 +158,46 @@ public class Teris extends JFrame {
         exit.addActionListener(actionlistener);
     }
 
-    protected boolean canShiftLeft() {
+    protected boolean shiftLeft() {
         shape.ShiftLeft();
-        boolean flag = !Utils.hasSamePoint(data);
-        shape.ShiftRight();
-        return flag;
+        boolean canShiftLeft = !Utils.hasSamePoint(data);
+        if (!canShiftLeft) {
+            shape.ShiftRight();
+        }
+        return canShiftLeft;
     }
 
-    protected boolean canShiftRight() {
+    protected boolean shiftRight() {
         shape.ShiftRight();
-        boolean flag = !Utils.hasSamePoint(data);
-        shape.ShiftLeft();
-        return flag;
+        boolean canShiftRight = !Utils.hasSamePoint(data);
+        if (!canShiftRight) {
+            shape.ShiftLeft();
+        }
+        return canShiftRight;
     }
 
-    protected boolean canChange() {
+    protected boolean changeShape() {
         try {
             shape.changeShape();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        boolean flag = !Utils.hasSamePoint(data);
+        boolean canChangeShape = !Utils.hasSamePoint(data);
         for (Point item : shape.getData()) {
             if (item.x >= row || item.y >= column || item.x < 0 || item.y < 0) {
-                flag = false;
+                canChangeShape = false;
                 System.out.println("Care");
                 break;
             }
         }
-        try {
-            shape.unChangeShape();
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (!canChangeShape) {
+            try {
+                shape.unChangeShape();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        return flag;
+        return canChangeShape;
     }
 
     private void move() {
@@ -213,13 +210,11 @@ public class Teris extends JFrame {
                 time.setDelay(speed);
             } else {
                 shape.ShiftDown();
-                direction = Direction.NULL;
             }
         } else {
             time.stop();
             // JOptionPane.showMessageDialog(this, "You Lose! Come on!");
-            int choice = JOptionPane.showConfirmDialog(this, "try again!",
-                    "Message", JOptionPane.YES_NO_OPTION);
+            int choice = JOptionPane.showConfirmDialog(this, "try again!", "Message", JOptionPane.YES_NO_OPTION);
             if (JOptionPane.YES_OPTION == choice) {
                 /**
                  * ready for the restart the game.
