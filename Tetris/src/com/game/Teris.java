@@ -10,7 +10,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,6 +20,8 @@ import javax.swing.Timer;
 
 import com.game.shape.Shape;
 import com.game.state.Direction;
+import com.game.state.ShapeEnum;
+import com.game.util.Enums;
 import com.game.util.SameRow;
 import com.game.util.Utils;
 
@@ -49,7 +50,6 @@ public class Teris extends JFrame {
     private JTextField score;
     private Shape shape;
     private int limitTop;
-    private Random rand;
     private SameRow sameRow;
 
     public Teris(String title, int row, int column) {
@@ -67,9 +67,7 @@ public class Teris extends JFrame {
     private void initial() {
         data = new ArrayList<Point>();
         speed = 1000;
-        // testPoint = new Point(0, 0);
         limitTop = row;
-        rand = new Random();
         sameRow = new SameRow();
         loadShape();
         createComponent();
@@ -291,8 +289,7 @@ public class Teris extends JFrame {
     }
 
     private void loadShape() {
-        shape = Utils.makeShape(Utils.conertRandToEnum(rand.nextInt(3)), row,
-                column);
+        shape = Utils.makeShape(Enums.random(ShapeEnum.class), row, column);
         int shiftToCenter = column / 2 - shape.getCenterOfShape();
         for (int i = 0; i < shiftToCenter; i++) {
             shape.ShiftRight();

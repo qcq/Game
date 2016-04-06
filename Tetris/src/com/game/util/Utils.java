@@ -32,18 +32,4 @@ public class Utils {
         set.addAll(data);
         return set.size() != data.size();
     }
-
-    public static ShapeEnum conertRandToEnum(int rand) {
-        switch (rand) {
-        case 0:
-            return ShapeEnum.SQURE;
-        case 1:
-            return ShapeEnum.LONG;
-        case 2:
-            return ShapeEnum.TRIANGLE;
-        default:
-            return ShapeEnum.SQURE;
-        }
-    }
-
 }
