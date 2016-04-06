@@ -12,4 +12,12 @@ public interface ShapeInterface {
     enum TRIANGLE implements ShapeInterface {
         TOP, RIGHT, DOWN, LEFT
     }
+
+    enum SEVEN implements ShapeInterface {
+        LEFT, TOP, RIGHT, DOWN
+    }
+
+    enum REVERSESEVEN implements ShapeInterface {
+        RIGHT, DOWN, LEFT, TOP
+    }
 }
