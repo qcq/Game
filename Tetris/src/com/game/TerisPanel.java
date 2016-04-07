@@ -43,6 +43,11 @@ public class TerisPanel extends JPanel {
         this.basePoint = point;
     }
 
+    /*
+     * 此处有一个坐标系的问题，在Teris这个类实例化采用row*column这种形式，也就是行*列的模式， 会导致一个问题：和java
+     * swing内置的作图坐标系相违背，原则上是横着的是X坐标轴，竖着的是y坐标轴， 但是采用上述的关系之后，需要在使用java
+     * swing作图的时候将x,y坐标轴进行调换。
+     */
     @Override
     public void paint(Graphics g) {
         Graphics2D gg = (Graphics2D) g;
