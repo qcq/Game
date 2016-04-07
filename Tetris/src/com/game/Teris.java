@@ -132,8 +132,8 @@ public class Teris extends JFrame {
                     time.setDelay(speed);
                     System.out.println(speed);
                 } else if (code == KeyEvent.VK_DOWN) {
-                    speed -= 100;
-                    speed = 0 == speed ? 100 : speed;
+                    speed /= 2;
+                    speed = 0 == speed ? 10 : speed;
                     time.setDelay(speed);
                     System.out.println(speed);
                 } else if (code == KeyEvent.VK_SPACE) {
@@ -214,7 +214,8 @@ public class Teris extends JFrame {
         } else {
             time.stop();
             // JOptionPane.showMessageDialog(this, "You Lose! Come on!");
-            int choice = JOptionPane.showConfirmDialog(this, "try again!", "Message", JOptionPane.YES_NO_OPTION);
+            int choice = JOptionPane.showConfirmDialog(this, "try again!",
+                    "Message", JOptionPane.YES_NO_OPTION);
             if (JOptionPane.YES_OPTION == choice) {
                 /**
                  * ready for the restart the game.
@@ -293,7 +294,7 @@ public class Teris extends JFrame {
     }
 
     public static void main(String[] args) {
-        new Teris("test", 50, 25);
+        new Teris("test", 30, 15);
     }
 
 }
