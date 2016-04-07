@@ -20,6 +20,7 @@ public class TerisPanel extends JPanel {
     private int row;
     private int column;
     private List<Point> data;
+    private Point basePoint;
 
     public TerisPanel() {
         this(null, 20, 10);
@@ -36,6 +37,10 @@ public class TerisPanel extends JPanel {
         this.data = data;
         this.row = row;
         this.column = column;
+    }
+
+    public void setBasePoint(Point point) {
+        this.basePoint = point;
     }
 
     @Override
@@ -65,6 +70,16 @@ public class TerisPanel extends JPanel {
         for (Point item : data) {
             gg.setColor(Color.GREEN);
             gg.fillRect(x + item.y * squre, y + item.x * squre, squre, squre);
+        }
+
+        /*
+         * draw the base line which can predict the place.
+         */
+        if (null != basePoint) {
+            gg.setStroke(new BasicStroke(0.5f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 1.0f,
+                    new float[] { 5f, 5f }, 0f));
+            gg.setColor(Color.red);
+            gg.drawLine(x + basePoint.y * squre, y, x + basePoint.y * squre, y + row * squre);
         }
 
         gg.setStroke(new BasicStroke(5f));

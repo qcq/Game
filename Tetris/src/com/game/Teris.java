@@ -67,8 +67,8 @@ public class Teris extends JFrame {
         speed = 1000;
         limitTop = row;
         sameRow = new SameRow();
-        loadShape();
         createComponent();
+        loadShape();
         layOut();
         listeners();
     }
@@ -214,8 +214,7 @@ public class Teris extends JFrame {
         } else {
             time.stop();
             // JOptionPane.showMessageDialog(this, "You Lose! Come on!");
-            int choice = JOptionPane.showConfirmDialog(this, "try again!",
-                    "Message", JOptionPane.YES_NO_OPTION);
+            int choice = JOptionPane.showConfirmDialog(this, "try again!", "Message", JOptionPane.YES_NO_OPTION);
             if (JOptionPane.YES_OPTION == choice) {
                 /**
                  * ready for the restart the game.
@@ -290,6 +289,7 @@ public class Teris extends JFrame {
         for (int i = 0; i < shiftToCenter; i++) {
             shape.ShiftRight();
         }
+        board.setBasePoint(shape.getData().get(2));
         data.addAll(shape.getData());
     }
 
