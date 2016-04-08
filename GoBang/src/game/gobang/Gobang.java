@@ -103,6 +103,14 @@ public class Gobang {
             System.out.println("This place already has one piece!");
             return false;
         }
+        if (0 == x && 0 == y || 1 == x && 1 == y || 0 == x && 1 == y || 1 == x && 0 == y) {
+            return false;
+        }
+
+        /*
+         * 格局的右上角四个方格用于指示当前该谁下子，所以不能放子。
+         */
+
         return true;
     }
 
@@ -285,8 +293,6 @@ public class Gobang {
      */
     public void playChess() {
         Scanner in = new Scanner(System.in);
-        Place x = new Place(0, 0);
-        Place y = new Place(row - 1, column - 1);
         label: while (true) {
             // The input should like 1,2
             while (in.hasNext()) {
@@ -318,7 +324,6 @@ public class Gobang {
                 } else {
                     setChess(indexX, indexY, GobangColor.WHITE);
                     printCheckerBoard();
-                    // if (isSuccess(x, y, GobangColor.WHITE)){
                     if (isSuccess(new Place(indexX, indexY), GobangColor.WHITE)) {
                         System.out.println("The White is win");
 

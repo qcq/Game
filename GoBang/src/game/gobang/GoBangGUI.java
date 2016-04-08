@@ -8,7 +8,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.Box;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,14 +15,16 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class GoBangGUI extends JFrame {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     private JPanel mainframe;
     private GoBangBoard board;
     private JPanel control;
-    private GridLayout grid;
     private BorderLayout border;
     private JButton start;
     private JButton end;
-    private JLabel label;
     private int row;
     private int column;
     private Gobang gobang;
@@ -38,7 +39,6 @@ public class GoBangGUI extends JFrame {
 
     public GoBangGUI(String title, int row, int column) {
         super(title);
-        // this.setUndecorated(true);
         this.row = row;
         this.column = column;
         this.flag = false;
@@ -62,22 +62,18 @@ public class GoBangGUI extends JFrame {
         mainframe = new JPanel();
         control = new JPanel();
         border = new BorderLayout();
-        grid = new GridLayout();
+        new GridLayout();
         start = new JButton("Start");
-        label = new JLabel();
+        new JLabel();
         gobang = new Gobang(row, column);
         board = new GoBangBoard(gobang, row, column);
         end = new JButton("Exit");
-        // gobang.getData()[0][0] = GobangColor.WHITE;
     }
 
     private void layOut() {
         this.getContentPane().add(mainframe);
-        // setBackpicture();
-        // mainframe.setBackground(Color.yellow);
         mainframe.setLayout(border);
         mainframe.add(board, BorderLayout.CENTER);
-        // board.setBounds(0, 0, 500, 500);
         mainframe.add(control, BorderLayout.EAST);
         Box ve = Box.createVerticalBox();
         ve.add(start);
@@ -85,13 +81,6 @@ public class GoBangGUI extends JFrame {
         end.setSize(start.getWidth(), start.getHeight());
         ve.add(end);
         control.add(ve);
-    }
-
-    private void setBackpicture() {
-        ImageIcon a = new ImageIcon("/home/qcq/1.jpg");
-        JLabel p = new JLabel(a);
-        p.setBounds(0, 0, a.getIconWidth(), a.getIconHeight());
-        this.getLayeredPane().add(p, Integer.MIN_VALUE);
     }
 
     /*
@@ -128,11 +117,10 @@ public class GoBangGUI extends JFrame {
                             JOptionPane.showMessageDialog(mainframe, "Change another place");
                         } else {
                             gobang.setChess(temp.getX(), temp.getY(), GobangColor.WHITE);
+                            gobang.setChess(0, 0, GobangColor.BLACK);
                             repaint();
                             if (gobang.isSuccess(new Place(0, 0), new Place(row - 1, column - 1), GobangColor.WHITE)) {
-                                // JOptionPane.showMessageDialog(mainframe, "The
-                                // white player is win");
-                                int choice = JOptionPane.showConfirmDialog(mainframe, "The white player is win",
+                                int choice = JOptionPane.showConfirmDialog(mainframe, "The blue player is win",
                                         "DO you want try again", JOptionPane.YES_NO_OPTION);
                                 if (choice == JOptionPane.YES_OPTION) {
                                     gobang.initial();
@@ -148,10 +136,9 @@ public class GoBangGUI extends JFrame {
                             JOptionPane.showMessageDialog(mainframe, "Change another place");
                         } else {
                             gobang.setChess(temp.getX(), temp.getY(), GobangColor.BLACK);
+                            gobang.setChess(0, 0, GobangColor.WHITE);
                             repaint();
                             if (gobang.isSuccess(new Place(0, 0), new Place(row - 1, column - 1), GobangColor.BLACK)) {
-                                // JOptionPane.showMessageDialog(mainframe, "The
-                                // black player is win");
                                 int choice = JOptionPane.showConfirmDialog(mainframe, "The black player is win",
                                         "DO you want try again", JOptionPane.YES_NO_OPTION);
                                 if (choice == JOptionPane.YES_OPTION) {

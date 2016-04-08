@@ -8,6 +8,10 @@ import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
 public class GoBangBoard extends JPanel {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     private Gobang gobang;
     private int row;
     private int column;
