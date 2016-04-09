@@ -50,6 +50,7 @@ public class GoBangBoard extends JPanel {
                 gg.drawRect(x + j * squre, y + i * squre, squre, squre);
             }
         }
+
         for (int i = 0; i < gobang.getData().length; i++) {
             for (int j = 0; j < gobang.getData()[i].length; j++) {
                 if (GobangColor.WHITE == gobang.getData()[i][j]) {
@@ -61,6 +62,18 @@ public class GoBangBoard extends JPanel {
                 }
             }
         }
+
+        gg.setStroke(new BasicStroke(6f));
+        gg.setColor(Color.red);
+        gg.drawRect(x, y, squre * 2, squre * 2);
+        if (GobangColor.BLACK == gobang.getData()[0][0]) {
+            gg.setColor(Color.BLACK);
+        } else if (GobangColor.WHITE == gobang.getData()[0][0]) {
+            gg.setColor(Color.blue);
+        } else {
+            ;
+        }
+        gg.fillOval(x, y, squre * 2, squre * 2);
 
         gg.setStroke(new BasicStroke(5f));
         gg.setColor(Color.blue);
