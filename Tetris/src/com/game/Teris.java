@@ -226,6 +226,7 @@ public class Teris extends JFrame {
 
     private void updateScore() {
         int counter = 0;
+        int collepsedRowNumber = 0;
         for (int i = row - 1; i >= 0; i--) {
             for (Point item : data) {
                 if (i == item.x) {
@@ -233,9 +234,9 @@ public class Teris extends JFrame {
                 }
             }
             if (column == counter) {
+                collepsedRowNumber++;
                 sameRow.setRow(i);
                 data.removeIf(sameRow);
-                score.setText(String.valueOf(Integer.valueOf(score.getText()) + 1));
                 moveTopToBelow(i);
                 /*
                  * here need to Re-scanning the row of i to be sure whether
@@ -245,6 +246,14 @@ public class Teris extends JFrame {
             }
             counter = 0;
         }
+        score.setText(String.valueOf(Integer.valueOf(score.getText()) + scoreFunction(collepsedRowNumber)));
+    }
+
+    /*
+     * 可以同时依据消掉的行数来使用不同的加分策略。
+     */
+    private int scoreFunction(int collepsedRowNumber) {
+        return collepsedRowNumber * collepsedRowNumber;
     }
 
     private void updateLimitTop() {
