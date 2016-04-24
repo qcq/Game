@@ -44,6 +44,7 @@ public class Teris extends JFrame {
     private KeyAdapter keylistener;
     private ActionListener timelistener;
     private Timer time;
+    private Timer updater;
     private int speed;
     private JTextField score;
     private Shape shape;
@@ -98,6 +99,16 @@ public class Teris extends JFrame {
         mainframe.add(board, BorderLayout.CENTER);
     }
 
+    private void loadShape() {
+        shape = Utils.makeShape(Enums.random(ShapeEnum.class), row, column);
+        int shiftToCenter = column / 2 - shape.getCenterOfShape();
+        for (int i = 0; i < shiftToCenter; i++) {
+            shape.ShiftRight();
+        }
+        board.setBasePoint(shape.getData().get(2));
+        data.addAll(shape.getData());
+    }
+
     private void listeners() {
         /*
          * action listener for the button of start)(for start) and end(for exit)
@@ -110,6 +121,7 @@ public class Teris extends JFrame {
                     System.exit(0);
                 } else if (command.equals("Start")) {
                     time.start();
+                    updater.start();
                     requestFocus();
                 }
             }
@@ -142,17 +154,22 @@ public class Teris extends JFrame {
                 }
             }
         };
-        timelistener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                move();
-                repaint();
-            }
-        };
         /**
          * here set the timer to the speed of 1 grid/sec
          */
-        time = new Timer(speed, timelistener);
+        time = new Timer(speed, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                move();
+            }
+        });
+        updater = new Timer(100, new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                repaint();
+            }
+        });
         this.addKeyListener(keylistener);
         start.addActionListener(actionlistener);
         exit.addActionListener(actionlistener);
@@ -213,6 +230,7 @@ public class Teris extends JFrame {
             }
         } else {
             time.stop();
+            updater.stop();
             // JOptionPane.showMessageDialog(this, "You Lose! Come on!");
             int choice = JOptionPane.showConfirmDialog(this, "try again!", "Message", JOptionPane.YES_NO_OPTION);
             if (JOptionPane.YES_OPTION == choice) {
@@ -290,16 +308,6 @@ public class Teris extends JFrame {
             flag = true;
         }
         return flag;
-    }
-
-    private void loadShape() {
-        shape = Utils.makeShape(Enums.random(ShapeEnum.class), row, column);
-        int shiftToCenter = column / 2 - shape.getCenterOfShape();
-        for (int i = 0; i < shiftToCenter; i++) {
-            shape.ShiftRight();
-        }
-        board.setBasePoint(shape.getData().get(2));
-        data.addAll(shape.getData());
     }
 
     public static void main(String[] args) {
