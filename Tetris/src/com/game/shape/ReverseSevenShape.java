@@ -10,7 +10,7 @@ public class ReverseSevenShape extends Shape {
 
     public ReverseSevenShape(List<Point> data, int row, int column) {
         super(data, row, column);
-        state = REVERSESEVEN.LEFT;
+        state = REVERSESEVEN.RIGHT;
     }
 
     @Override
@@ -59,11 +59,11 @@ public class ReverseSevenShape extends Shape {
             data.get(3).setLocation(point.x, point.y + 1);
             state = REVERSESEVEN.TOP;
             break;
-        case DOWN:
-            data.get(0).setLocation(point.x - 1, point.y);
-            data.get(1).setLocation(point.x - 1, point.y + 1);
-            data.get(3).setLocation(point.x + 1, point.y);
-            state = REVERSESEVEN.RIGHT;
+        case TOP:
+            data.get(0).setLocation(point.x + 1, point.y);
+            data.get(1).setLocation(point.x + 1, point.y - 1);
+            data.get(3).setLocation(point.x - 1, point.y);
+            state = REVERSESEVEN.LEFT;
             break;
         case LEFT:
             data.get(0).setLocation(point.x, point.y + 1);
@@ -71,11 +71,11 @@ public class ReverseSevenShape extends Shape {
             data.get(3).setLocation(point.x, point.y - 1);
             state = REVERSESEVEN.DOWN;
             break;
-        case TOP:
-            data.get(0).setLocation(point.x + 1, point.y);
-            data.get(1).setLocation(point.x + 1, point.y - 1);
-            data.get(3).setLocation(point.x - 1, point.y);
-            state = REVERSESEVEN.LEFT;
+        case DOWN:
+            data.get(0).setLocation(point.x - 1, point.y);
+            data.get(1).setLocation(point.x - 1, point.y + 1);
+            data.get(3).setLocation(point.x + 1, point.y);
+            state = REVERSESEVEN.RIGHT;
             break;
         default:
             throw new Exception("sth wrong here ReverseSevenShape");

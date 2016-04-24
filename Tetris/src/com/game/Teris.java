@@ -20,7 +20,6 @@ import javax.swing.Timer;
 
 import com.game.shape.Shape;
 import com.game.state.ShapeEnum;
-import com.game.util.Enums;
 import com.game.util.SameRow;
 import com.game.util.Utils;
 
@@ -99,7 +98,8 @@ public class Teris extends JFrame {
     }
 
     private void loadShape() {
-        shape = Utils.makeShape(Enums.random(ShapeEnum.class), row, column);
+        // shape = Utils.makeShape(Enums.random(ShapeEnum.class), row, column);
+        shape = Utils.makeShape(ShapeEnum.REVERSESEVEN, row, column);
         int shiftToCenter = column / 2 - shape.getCenterOfShape();
         for (int i = 0; i < shiftToCenter; i++) {
             shape.ShiftRight();
@@ -150,6 +150,7 @@ public class Teris extends JFrame {
                 } else if (code == KeyEvent.VK_SPACE) {
                     changeShape();
                 } else {
+                    System.out.println("undefine for this key!");
                 }
             }
         };
@@ -241,6 +242,34 @@ public class Teris extends JFrame {
         }
     }
 
+    /*
+     * This method should check whether the game can go on. same with
+     * canShiftDown function.
+     */
+    private boolean isAlive() {
+        return limitTop > 0;
+    }
+
+    /*
+     * This method will check whether single move is overd. no data overlapped.
+     */
+    private boolean isMoveFinished() {
+        boolean flag = false;
+        if (shape.ShiftDown()) {
+            flag = Utils.hasSamePoint(data);
+            shape.ShiftUp();
+        } else {
+            flag = true;
+        }
+        return flag;
+    }
+
+    private void updateLimitTop() {
+        for (Point item : data) {
+            limitTop = Math.min(limitTop, item.x);
+        }
+    }
+
     private void updateScore() {
         int counter = 0;
         int collepsedRowNumber = 0;
@@ -266,19 +295,6 @@ public class Teris extends JFrame {
         score.setText(String.valueOf(Integer.valueOf(score.getText()) + scoreFunction(collepsedRowNumber)));
     }
 
-    /*
-     * 可以同时依据消掉的行数来使用不同的加分策略。
-     */
-    private int scoreFunction(int collepsedRowNumber) {
-        return collepsedRowNumber * collepsedRowNumber;
-    }
-
-    private void updateLimitTop() {
-        for (Point item : data) {
-            limitTop = Math.min(limitTop, item.x);
-        }
-    }
-
     private void moveTopToBelow(int i) {
         for (Point item : data) {
             if (item.x < i) {
@@ -288,25 +304,10 @@ public class Teris extends JFrame {
     }
 
     /*
-     * This method should check whether the game can go on. same with
-     * canShiftDown function.
+     * 可以同时依据消掉的行数来使用不同的加分策略。
      */
-    private boolean isAlive() {
-        return limitTop > 0;
-    }
-
-    /*
-     * This method will check whether single move is overd. no data overlapped.
-     */
-    private boolean isMoveFinished() {
-        boolean flag = false;
-        if (shape.ShiftDown()) {
-            flag = Utils.hasSamePoint(data);
-            shape.ShiftUp();
-        } else {
-            flag = true;
-        }
-        return flag;
+    private int scoreFunction(int collepsedRowNumber) {
+        return collepsedRowNumber * collepsedRowNumber;
     }
 
     public static void main(String[] args) {
