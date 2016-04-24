@@ -42,7 +42,6 @@ public class Teris extends JFrame {
     private List<Point> data;
     private ActionListener actionlistener;
     private KeyAdapter keylistener;
-    private ActionListener timelistener;
     private Timer time;
     private Timer updater;
     private int speed;
