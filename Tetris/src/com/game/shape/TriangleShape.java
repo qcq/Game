@@ -70,6 +70,7 @@ public class TriangleShape extends Shape {
             data.get(1).setLocation(point.x - 1, point.y);
             data.get(3).setLocation(point.x + 1, point.y);
             state = TRIANGLE.RIGHT;
+            break;
         case RIGHT:
             data.get(0).setLocation(point.x - 1, point.y);
             data.get(1).setLocation(point.x, point.y - 1);
