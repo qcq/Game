@@ -98,8 +98,11 @@ public class Teris extends JFrame {
     }
 
     private void loadShape() {
+        /*
+         * for debug reason.
+         */
         // shape = Utils.makeShape(Enums.random(ShapeEnum.class), row, column);
-        shape = Utils.makeShape(ShapeEnum.REVERSESEVEN, row, column);
+        shape = Utils.makeShape(ShapeEnum.TRIANGLE, row, column);
         int shiftToCenter = column / 2 - shape.getCenterOfShape();
         for (int i = 0; i < shiftToCenter; i++) {
             shape.ShiftRight();
