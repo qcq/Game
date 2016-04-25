@@ -20,6 +20,7 @@ import javax.swing.Timer;
 
 import com.game.shape.Shape;
 import com.game.state.ShapeEnum;
+import com.game.util.Enums;
 import com.game.util.SameRow;
 import com.game.util.Utils;
 
@@ -101,8 +102,8 @@ public class Teris extends JFrame {
         /*
          * for debug reason.
          */
-        // shape = Utils.makeShape(Enums.random(ShapeEnum.class), row, column);
-        shape = Utils.makeShape(ShapeEnum.TRIANGLE, row, column);
+        shape = Utils.makeShape(Enums.random(ShapeEnum.class), row, column);
+        // shape = Utils.makeShape(ShapeEnum.TRIANGLE, row, column);
         int shiftToCenter = column / 2 - shape.getCenterOfShape();
         for (int i = 0; i < shiftToCenter; i++) {
             shape.ShiftRight();
