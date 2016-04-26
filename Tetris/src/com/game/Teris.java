@@ -43,7 +43,6 @@ public class Teris extends JFrame {
     private ActionListener actionlistener;
     private KeyAdapter keylistener;
     private Timer time;
-    private Timer updater;
     private int speed;
     private JTextField score;
     private Shape shape;
@@ -124,7 +123,6 @@ public class Teris extends JFrame {
                     System.exit(0);
                 } else if (command.equals("Start")) {
                     time.start();
-                    updater.start();
                     requestFocus();
                 }
             }
@@ -167,13 +165,6 @@ public class Teris extends JFrame {
                 move();
             }
         });
-        updater = new Timer(100, new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                repaint();
-            }
-        });
         this.addKeyListener(keylistener);
         start.addActionListener(actionlistener);
         exit.addActionListener(actionlistener);
@@ -184,6 +175,8 @@ public class Teris extends JFrame {
         boolean canShiftLeft = !Utils.hasSamePoint(data);
         if (!canShiftLeft) {
             shape.ShiftRight();
+        } else {
+            repaint();
         }
         return canShiftLeft;
     }
@@ -193,6 +186,8 @@ public class Teris extends JFrame {
         boolean canShiftRight = !Utils.hasSamePoint(data);
         if (!canShiftRight) {
             shape.ShiftLeft();
+        } else {
+            repaint();
         }
         return canShiftRight;
     }
@@ -217,6 +212,8 @@ public class Teris extends JFrame {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        } else {
+            repaint();
         }
         return canChangeShape;
     }
@@ -231,10 +228,10 @@ public class Teris extends JFrame {
                 time.setDelay(speed);
             } else {
                 shape.ShiftDown();
+                repaint();
             }
         } else {
             time.stop();
-            updater.stop();
             // JOptionPane.showMessageDialog(this, "You Lose! Come on!");
             int choice = JOptionPane.showConfirmDialog(this, "try again!", "Message", JOptionPane.YES_NO_OPTION);
             if (JOptionPane.YES_OPTION == choice) {
