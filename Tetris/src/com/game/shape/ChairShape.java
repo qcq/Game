@@ -3,6 +3,7 @@ package com.game.shape;
 import java.awt.Point;
 import java.util.List;
 
+import com.game.Teris;
 import com.game.state.ShapeInterface.CHAIR;
 
 public class ChairShape extends Shape {
@@ -11,6 +12,7 @@ public class ChairShape extends Shape {
     public ChairShape(List<Point> data, int row, int column) {
         super(data, row, column);
         state = CHAIR.HORIZONTAL;
+        Teris.logger.info("ChairShape created with " + state);
     }
 
     @Override
@@ -34,6 +36,7 @@ public class ChairShape extends Shape {
         }
         initialLimits();
         getLimits();
+        Teris.logger.info("ChairShape chaged to with " + state);
         return true;
     }
 
@@ -41,6 +44,7 @@ public class ChairShape extends Shape {
     public boolean unChangeShape() throws Exception {
         try {
             changeShape();
+            Teris.logger.info("ChairShape chaged backed to with " + state);
             return false;
         } catch (Exception e) {
             e.printStackTrace();

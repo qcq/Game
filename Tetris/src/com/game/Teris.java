@@ -18,6 +18,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.Timer;
 
+import org.apache.log4j.Logger;
+
 import com.game.shape.Shape;
 import com.game.state.ShapeEnum;
 import com.game.util.Enums;
@@ -48,11 +50,14 @@ public class Teris extends JFrame {
     private Shape shape;
     private int limitTop;
     private SameRow sameRow;
+    public static Logger logger;
 
     public Teris(String title, int row, int column) {
         super(title);
+        logger = Logger.getLogger("Teris");
         this.row = row;
         this.column = column;
+        logger.info("The game initial with " + row + " rows, " + column + " columns.");
         initial();
         setSize(300, (int) (300 * this.row * 1.0 / this.column));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -66,6 +71,7 @@ public class Teris extends JFrame {
         speed = 1000;
         limitTop = row;
         sameRow = new SameRow();
+
         createComponent();
         loadShape();
         layOut();
@@ -82,6 +88,7 @@ public class Teris extends JFrame {
         flow = new FlowLayout();
         score = new JTextField();
         score.setEditable(false);
+        logger.info("createComponent sucessed");
     }
 
     private void layOut() {
@@ -101,7 +108,9 @@ public class Teris extends JFrame {
         /*
          * for debug reason.
          */
-        shape = Utils.makeShape(Enums.random(ShapeEnum.class), row, column);
+        ShapeEnum shapeEnum = Enums.random(ShapeEnum.class);
+        shape = Utils.makeShape(shapeEnum, row, column);
+        logger.info(shapeEnum);
         // shape = Utils.makeShape(ShapeEnum.TRIANGLE, row, column);
         int shiftToCenter = column / 2 - shape.getCenterOfShape();
         for (int i = 0; i < shiftToCenter; i++) {
@@ -123,6 +132,7 @@ public class Teris extends JFrame {
                     System.exit(0);
                 } else if (command.equals("Start")) {
                     time.start();
+                    logger.info("timer start.");
                     requestFocus();
                 }
             }
@@ -143,17 +153,15 @@ public class Teris extends JFrame {
                 } else if (code == KeyEvent.VK_UP) {
                     speed += 100;
                     time.setDelay(speed);
-                    System.out.println(speed);
                 } else if (code == KeyEvent.VK_DOWN) {
                     speed /= 2;
                     speed = 0 == speed ? 10 : speed;
                     time.setDelay(speed);
-                    System.out.println(speed);
                 } else if (code == KeyEvent.VK_SPACE) {
                     changeShape();
                 } else {
-                    System.out.println("undefine for this key!");
                 }
+                logger.info("current speed:" + speed);
             }
         };
         /**
@@ -202,7 +210,7 @@ public class Teris extends JFrame {
         for (Point item : shape.getData()) {
             if (item.x >= row || item.y >= column || item.x < 0 || item.y < 0) {
                 canChangeShape = false;
-                System.out.println("Care");
+                logger.info("can not change the shape, because will over or touch framework");
                 break;
             }
         }
@@ -232,7 +240,7 @@ public class Teris extends JFrame {
             }
         } else {
             time.stop();
-            // JOptionPane.showMessageDialog(this, "You Lose! Come on!");
+            logger.info("timer stoped!");
             int choice = JOptionPane.showConfirmDialog(this, "try again!", "Message", JOptionPane.YES_NO_OPTION);
             if (JOptionPane.YES_OPTION == choice) {
                 /**

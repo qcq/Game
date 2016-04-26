@@ -3,6 +3,7 @@ package com.game.shape;
 import java.awt.Point;
 import java.util.List;
 
+import com.game.Teris;
 import com.game.state.ShapeInterface.REVERSESEVEN;
 
 public class ReverseSevenShape extends Shape {
@@ -11,6 +12,7 @@ public class ReverseSevenShape extends Shape {
     public ReverseSevenShape(List<Point> data, int row, int column) {
         super(data, row, column);
         state = REVERSESEVEN.RIGHT;
+        Teris.logger.info("ReverseSevenShape created with " + state);
     }
 
     @Override
@@ -46,6 +48,7 @@ public class ReverseSevenShape extends Shape {
         }
         initialLimits();
         getLimits();
+        Teris.logger.info("ChairShape chaged to with " + state);
         return true;
     }
 
@@ -82,6 +85,7 @@ public class ReverseSevenShape extends Shape {
         }
         initialLimits();
         getLimits();
+        Teris.logger.info("ChairShape chaged backed to with " + state);
         return true;
     }
 

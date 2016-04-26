@@ -3,6 +3,7 @@ package com.game.shape;
 import java.awt.Point;
 import java.util.List;
 
+import com.game.Teris;
 import com.game.state.ShapeInterface.TRIANGLE;
 
 public class TriangleShape extends Shape {
@@ -11,6 +12,7 @@ public class TriangleShape extends Shape {
     public TriangleShape(List<Point> data, int row, int column) {
         super(data, row, column);
         state = TRIANGLE.TOP;
+        Teris.logger.info("TriangleShape created with " + state);
     }
 
     @Override
@@ -46,6 +48,7 @@ public class TriangleShape extends Shape {
         }
         initialLimits();
         getLimits();
+        Teris.logger.info("ChairShape chaged to with " + state);
         return true;
     }
 
@@ -82,6 +85,7 @@ public class TriangleShape extends Shape {
         }
         initialLimits();
         getLimits();
+        Teris.logger.info("ChairShape chaged backed to with " + state);
         return true;
     }
 
