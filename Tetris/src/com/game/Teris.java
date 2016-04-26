@@ -40,6 +40,7 @@ public class Teris extends JFrame {
     private FlowLayout flow;
     private JButton start;
     private JButton exit;
+    private JButton pause;
     private TerisPanel board;
     private List<Point> data;
     private ActionListener actionlistener;
@@ -50,6 +51,7 @@ public class Teris extends JFrame {
     private Shape shape;
     private int limitTop;
     private SameRow sameRow;
+    private boolean runState;
     public static Logger logger;
 
     public Teris(String title, int row, int column) {
@@ -57,9 +59,10 @@ public class Teris extends JFrame {
         logger = Logger.getLogger("Teris");
         this.row = row;
         this.column = column;
+        runState = true;
         logger.info("The game initial with " + row + " rows, " + column + " columns.");
         initial();
-        setSize(300, (int) (300 * this.row * 1.0 / this.column));
+        setSize(350, (int) (350 * this.row * 1.0 / this.column));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
         this.setVisible(true);
@@ -81,6 +84,7 @@ public class Teris extends JFrame {
     private void createComponent() {
         start = new JButton("Start");
         exit = new JButton("Exit");
+        pause = new JButton("Pause");
         mainframe = new JPanel();
         control = new JPanel();
         border = new BorderLayout();
@@ -99,6 +103,7 @@ public class Teris extends JFrame {
         control.add(start);
         control.add(score);
         control.add(exit);
+        control.add(pause);
         score.setPreferredSize(new Dimension(70, 30));
         score.setText("0");
         mainframe.add(board, BorderLayout.CENTER);
@@ -134,6 +139,15 @@ public class Teris extends JFrame {
                     time.start();
                     logger.info("timer start.");
                     requestFocus();
+                } else if (command.equals("Pause")) {
+                    runState = !runState;
+                    if (runState) {
+                        time.restart();
+                        logger.info("close pause, game begin");
+                    } else {
+                        time.stop();
+                        logger.info("open pause, game stop");
+                    }
                 }
             }
         };
@@ -176,6 +190,7 @@ public class Teris extends JFrame {
         this.addKeyListener(keylistener);
         start.addActionListener(actionlistener);
         exit.addActionListener(actionlistener);
+        pause.addActionListener(actionlistener);
     }
 
     protected boolean shiftLeft() {
