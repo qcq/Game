@@ -325,3 +325,46 @@
 2016-04-27 07:49:03  [ com.game.Teris.loadShape(Teris.java:118):AWT-EventQueue-0:33882 ] - [ INFO ]  LONG
 2016-04-27 07:49:06  [ com.game.Teris$1.actionPerformed(Teris.java:149):AWT-EventQueue-0:36599 ] - [ INFO ]  open pause, game stop
 2016-04-27 07:49:08  [ com.game.Teris$1.actionPerformed(Teris.java:146):AWT-EventQueue-0:38438 ] - [ INFO ]  close pause, game begin
+2016-04-27 07:59:02  [ com.game.Teris.<init>(Teris.java:63):main:0 ] - [ INFO ]  The game initial with 30 rows, 15 columns.
+2016-04-27 07:59:02  [ com.game.Teris.createComponent(Teris.java:95):main:26 ] - [ INFO ]  createComponent sucessed
+2016-04-27 07:59:02  [ com.game.Teris.loadShape(Teris.java:118):main:33 ] - [ INFO ]  SQURE
+2016-04-27 07:59:05  [ com.game.Teris$1.actionPerformed(Teris.java:140):AWT-EventQueue-0:2569 ] - [ INFO ]  timer start.
+2016-04-27 07:59:10  [ com.game.Teris$1.actionPerformed(Teris.java:149):AWT-EventQueue-0:7687 ] - [ INFO ]  open pause, game stop
+2016-04-27 07:59:12  [ com.game.Teris$1.actionPerformed(Teris.java:146):AWT-EventQueue-0:9646 ] - [ INFO ]  close pause, game begin
+2016-04-27 07:59:19  [ com.game.Teris$1.actionPerformed(Teris.java:140):AWT-EventQueue-0:16520 ] - [ INFO ]  timer start.
+2016-04-27 07:59:25  [ com.game.Teris$2.keyPressed(Teris.java:178):AWT-EventQueue-0:23154 ] - [ INFO ]  current speed:1000
+2016-04-27 07:59:54  [ com.game.Teris.<init>(Teris.java:63):main:0 ] - [ INFO ]  The game initial with 30 rows, 15 columns.
+2016-04-27 07:59:54  [ com.game.Teris.createComponent(Teris.java:95):main:24 ] - [ INFO ]  createComponent sucessed
+2016-04-27 07:59:54  [ com.game.shape.SevenShape.<init>(SevenShape.java:15):main:32 ] - [ INFO ]  SevenShape created with LEFT
+2016-04-27 07:59:54  [ com.game.Teris.loadShape(Teris.java:118):main:32 ] - [ INFO ]  SEVEN
+2016-04-27 07:59:56  [ com.game.Teris$1.actionPerformed(Teris.java:140):AWT-EventQueue-0:2381 ] - [ INFO ]  timer start.
+2016-04-27 08:00:00  [ com.game.Teris$2.keyPressed(Teris.java:178):AWT-EventQueue-0:6464 ] - [ INFO ]  current speed:1000
+2016-04-27 08:00:00  [ com.game.Teris$2.keyPressed(Teris.java:178):AWT-EventQueue-0:6754 ] - [ INFO ]  current speed:1000
+2016-04-27 08:00:01  [ com.game.Teris$2.keyPressed(Teris.java:178):AWT-EventQueue-0:7090 ] - [ INFO ]  current speed:1000
+2016-04-27 08:00:01  [ com.game.Teris$2.keyPressed(Teris.java:178):AWT-EventQueue-0:7301 ] - [ INFO ]  current speed:1000
+2016-04-27 08:00:01  [ com.game.Teris$2.keyPressed(Teris.java:178):AWT-EventQueue-0:7580 ] - [ INFO ]  current speed:1000
+2016-04-27 08:00:03  [ com.game.Teris$1.actionPerformed(Teris.java:149):AWT-EventQueue-0:9213 ] - [ INFO ]  open pause, game stop
+2016-04-27 08:00:08  [ com.game.Teris$1.actionPerformed(Teris.java:146):AWT-EventQueue-0:14252 ] - [ INFO ]  close pause, game begin
+2016-04-27 08:01:23  [ com.game.Teris.<init>(Teris.java:63):main:0 ] - [ INFO ]  The game initial with 30 rows, 15 columns.
+2016-04-27 08:01:23  [ com.game.Teris.createComponent(Teris.java:95):main:23 ] - [ INFO ]  createComponent sucessed
+2016-04-27 08:01:23  [ com.game.shape.ChairShape.<init>(ChairShape.java:15):main:30 ] - [ INFO ]  ChairShape created with HORIZONTAL
+2016-04-27 08:01:23  [ com.game.Teris.loadShape(Teris.java:118):main:30 ] - [ INFO ]  CHAIR
+2016-04-27 08:01:26  [ com.game.Teris$1.actionPerformed(Teris.java:140):AWT-EventQueue-0:3395 ] - [ INFO ]  timer start.
+2016-04-27 08:01:29  [ com.game.Teris$2.keyPressed(Teris.java:179):AWT-EventQueue-0:6662 ] - [ INFO ]  current speed:1000
+2016-04-27 08:01:31  [ com.game.Teris$1.actionPerformed(Teris.java:150):AWT-EventQueue-0:8295 ] - [ INFO ]  open pause, game stop
+2016-04-27 08:01:32  [ com.game.Teris$1.actionPerformed(Teris.java:147):AWT-EventQueue-0:9616 ] - [ INFO ]  close pause, game begin
+2016-04-27 08:01:34  [ com.game.Teris$2.keyPressed(Teris.java:179):AWT-EventQueue-0:10815 ] - [ INFO ]  current speed:1000
+2016-04-27 08:01:34  [ com.game.Teris$2.keyPressed(Teris.java:179):AWT-EventQueue-0:11412 ] - [ INFO ]  current speed:1000
+2016-04-27 08:01:35  [ com.game.Teris$2.keyPressed(Teris.java:179):AWT-EventQueue-0:11843 ] - [ INFO ]  current speed:1000
+2016-04-27 08:01:35  [ com.game.Teris$2.keyPressed(Teris.java:179):AWT-EventQueue-0:12055 ] - [ INFO ]  current speed:1000
+2016-04-27 08:01:35  [ com.game.Teris$2.keyPressed(Teris.java:179):AWT-EventQueue-0:12240 ] - [ INFO ]  current speed:1000
+2016-04-27 08:01:35  [ com.game.Teris$2.keyPressed(Teris.java:179):AWT-EventQueue-0:12439 ] - [ INFO ]  current speed:1000
+2016-04-27 08:01:35  [ com.game.Teris$2.keyPressed(Teris.java:179):AWT-EventQueue-0:12702 ] - [ INFO ]  current speed:1000
+2016-04-27 08:01:36  [ com.game.Teris$2.keyPressed(Teris.java:179):AWT-EventQueue-0:12895 ] - [ INFO ]  current speed:1000
+2016-04-27 08:01:36  [ com.game.Teris$2.keyPressed(Teris.java:179):AWT-EventQueue-0:13042 ] - [ INFO ]  current speed:1000
+2016-04-27 08:01:36  [ com.game.Teris$2.keyPressed(Teris.java:179):AWT-EventQueue-0:13218 ] - [ INFO ]  current speed:1000
+2016-04-27 08:01:36  [ com.game.Teris$2.keyPressed(Teris.java:179):AWT-EventQueue-0:13676 ] - [ INFO ]  current speed:1000
+2016-04-27 08:01:37  [ com.game.Teris$2.keyPressed(Teris.java:179):AWT-EventQueue-0:13942 ] - [ INFO ]  current speed:1000
+2016-04-27 08:01:37  [ com.game.Teris$2.keyPressed(Teris.java:179):AWT-EventQueue-0:14133 ] - [ INFO ]  current speed:1000
+2016-04-27 08:01:37  [ com.game.Teris$2.keyPressed(Teris.java:179):AWT-EventQueue-0:14730 ] - [ INFO ]  current speed:1000
+2016-04-27 08:01:38  [ com.game.Teris$2.keyPressed(Teris.java:179):AWT-EventQueue-0:14907 ] - [ INFO ]  current speed:1000

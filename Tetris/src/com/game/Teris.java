@@ -142,7 +142,8 @@ public class Teris extends JFrame {
                 } else if (command.equals("Pause")) {
                     runState = !runState;
                     if (runState) {
-                        time.restart();
+                        time.start();
+                        requestFocus();
                         logger.info("close pause, game begin");
                     } else {
                         time.stop();
