@@ -1,10 +1,10 @@
 package com.game.shape;
 
-import java.awt.Point;
 import java.util.List;
 
 import com.game.Teris;
 import com.game.state.ShapeInterface.REVERSECHAIR;
+import com.game.util.Point;
 
 public class ReverseChairShpae extends Shape {
     private REVERSECHAIR state;

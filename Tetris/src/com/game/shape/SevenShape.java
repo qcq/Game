@@ -1,10 +1,10 @@
 package com.game.shape;
 
-import java.awt.Point;
 import java.util.List;
 
 import com.game.Teris;
 import com.game.state.ShapeInterface.SEVEN;
+import com.game.util.Point;
 
 public class SevenShape extends Shape {
     private SEVEN state;

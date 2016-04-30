@@ -1,7 +1,8 @@
 package com.game.shape;
 
-import java.awt.Point;
 import java.util.List;
+
+import com.game.util.Point;
 
 public abstract class Shape {
     protected List<Point> data;

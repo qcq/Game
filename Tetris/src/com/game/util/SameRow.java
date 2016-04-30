@@ -1,6 +1,6 @@
 package com.game.util;
 
-import java.awt.Point;
+import com.game.util.Point;
 import java.util.function.Predicate;
 
 public class SameRow implements Predicate<Point> {

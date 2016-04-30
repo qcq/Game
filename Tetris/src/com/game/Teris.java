@@ -3,7 +3,6 @@ package com.game;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -23,6 +22,7 @@ import org.apache.log4j.Logger;
 import com.game.shape.Shape;
 import com.game.state.ShapeEnum;
 import com.game.util.Enums;
+import com.game.util.Point;
 import com.game.util.SameRow;
 import com.game.util.Utils;
 

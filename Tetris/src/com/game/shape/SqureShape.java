@@ -1,7 +1,8 @@
 package com.game.shape;
 
-import java.awt.Point;
 import java.util.List;
+
+import com.game.util.Point;
 
 public class SqureShape extends Shape {
 

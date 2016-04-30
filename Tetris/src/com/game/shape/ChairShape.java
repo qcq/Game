@@ -1,10 +1,10 @@
 package com.game.shape;
 
-import java.awt.Point;
 import java.util.List;
 
 import com.game.Teris;
 import com.game.state.ShapeInterface.CHAIR;
+import com.game.util.Point;
 
 public class ChairShape extends Shape {
     private CHAIR state;

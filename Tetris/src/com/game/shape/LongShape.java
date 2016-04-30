@@ -1,10 +1,10 @@
 package com.game.shape;
 
-import java.awt.Point;
 import java.util.List;
 
 import com.game.Teris;
 import com.game.state.ShapeInterface.LONG;
+import com.game.util.Point;
 
 public class LongShape extends Shape {
     private LONG state;

@@ -4,10 +4,11 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Point;
 import java.util.List;
 
 import javax.swing.JPanel;
+
+import com.game.util.Point;
 
 /**
  * in this file draw the background and the moving snake.
@@ -73,7 +74,7 @@ public class TerisPanel extends JPanel {
          * draw the russia squre which meaningful to game.
          */
         for (Point item : data) {
-            gg.setColor(Color.GREEN);
+            gg.setColor(item.color);
             gg.fillRect(x + item.y * squre, y + item.x * squre, squre, squre);
         }
 
