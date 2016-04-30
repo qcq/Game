@@ -4,12 +4,12 @@ import java.util.List;
 
 import com.game.Teris;
 import com.game.state.ShapeInterface.LONG;
-import com.game.util.Point;
+import com.game.util.Cell;
 
 public class LongShape extends Shape {
     private LONG state;
 
-    public LongShape(List<Point> data, int row, int column) {
+    public LongShape(List<Cell> data, int row, int column) {
         super(data, row, column);
         state = LONG.HORIZONTAL;
         Teris.logger.info("LongShape created with " + state);
@@ -17,7 +17,7 @@ public class LongShape extends Shape {
 
     @Override
     public boolean changeShape() throws Exception {
-        Point point = data.get(2);
+        Cell point = data.get(2);
         switch (state) {
         case HORIZONTAL:
             data.get(0).setLocation(point.x - 2, point.y);

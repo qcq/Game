@@ -1,9 +1,9 @@
 package com.game.util;
 
-import com.game.util.Point;
+import com.game.util.Cell;
 import java.util.function.Predicate;
 
-public class SameRow implements Predicate<Point> {
+public class SameRow implements Predicate<Cell> {
     /*
      * This class used for to check whether the Point in same row. predict
      * function.
@@ -23,7 +23,7 @@ public class SameRow implements Predicate<Point> {
     }
 
     @Override
-    public boolean test(Point t) {
+    public boolean test(Cell t) {
         return t.x == row;
     }
 }

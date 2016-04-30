@@ -4,12 +4,12 @@ import java.util.List;
 
 import com.game.Teris;
 import com.game.state.ShapeInterface.TRIANGLE;
-import com.game.util.Point;
+import com.game.util.Cell;
 
 public class TriangleShape extends Shape {
     private TRIANGLE state;
 
-    public TriangleShape(List<Point> data, int row, int column) {
+    public TriangleShape(List<Cell> data, int row, int column) {
         super(data, row, column);
         state = TRIANGLE.TOP;
         Teris.logger.info("TriangleShape created with " + state);
@@ -17,7 +17,7 @@ public class TriangleShape extends Shape {
 
     @Override
     public boolean changeShape() throws Exception {
-        Point point = data.get(2);
+        Cell point = data.get(2);
         switch (state) {
         case TOP:
             data.get(0).setLocation(point.x, point.y + 1);
@@ -54,7 +54,7 @@ public class TriangleShape extends Shape {
 
     @Override
     public boolean unChangeShape() throws Exception {
-        Point point = data.get(2);
+        Cell point = data.get(2);
         switch (state) {
         case TOP:
             data.get(0).setLocation(point.x, point.y - 1);

@@ -2,10 +2,10 @@ package com.game.shape;
 
 import java.util.List;
 
-import com.game.util.Point;
+import com.game.util.Cell;
 
 public abstract class Shape {
-    protected List<Point> data;
+    protected List<Cell> data;
     private int limitLeft;
     private int limitRight;
     private int limitBelow;
@@ -14,7 +14,7 @@ public abstract class Shape {
     private int column;
     private int centerOfShape;
 
-    public Shape(List<Point> data, int row, int column) {
+    public Shape(List<Cell> data, int row, int column) {
         this.data = data;
         this.row = row;
         this.column = column;
@@ -31,7 +31,7 @@ public abstract class Shape {
 
     public void getLimits() {
         int sum = 0;
-        for (Point item : data) {
+        for (Cell item : data) {
             limitLeft = Math.min(limitLeft, item.y);
             limitRight = Math.max(limitRight, item.y);
             limitTop = Math.min(limitTop, item.x);
@@ -47,7 +47,7 @@ public abstract class Shape {
         }
         limitLeft--;
         limitRight--;
-        for (Point item : data) {
+        for (Cell item : data) {
             item.y = item.y - 1;
         }
         return true;
@@ -59,7 +59,7 @@ public abstract class Shape {
         }
         limitLeft++;
         limitRight++;
-        for (Point item : data) {
+        for (Cell item : data) {
             item.y = item.y + 1;
         }
         return true;
@@ -71,7 +71,7 @@ public abstract class Shape {
         }
         limitTop++;
         limitBelow++;
-        for (Point item : data) {
+        for (Cell item : data) {
             item.x = item.x + 1;
         }
         return true;
@@ -80,17 +80,17 @@ public abstract class Shape {
     public boolean ShiftUp() {
         limitTop--;
         limitBelow--;
-        for (Point item : data) {
+        for (Cell item : data) {
             item.x = item.x - 1;
         }
         return true;
     }
 
-    public List<Point> getData() {
+    public List<Cell> getData() {
         return data;
     }
 
-    public void setData(List<Point> data) {
+    public void setData(List<Cell> data) {
         this.data = data;
     }
 

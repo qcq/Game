@@ -21,8 +21,8 @@ import org.apache.log4j.Logger;
 
 import com.game.shape.Shape;
 import com.game.state.ShapeEnum;
+import com.game.util.Cell;
 import com.game.util.Enums;
-import com.game.util.Point;
 import com.game.util.SameRow;
 import com.game.util.Utils;
 
@@ -42,7 +42,7 @@ public class Teris extends JFrame {
     private JButton exit;
     private JButton pause;
     private TerisPanel board;
-    private List<Point> data;
+    private List<Cell> data;
     private ActionListener actionlistener;
     private KeyAdapter keylistener;
     private Timer time;
@@ -53,6 +53,7 @@ public class Teris extends JFrame {
     private SameRow sameRow;
     private boolean runState;
     public static Logger logger;
+    private int INITIAL_SPEED = 800;
 
     public Teris(String title, int row, int column) {
         super(title);
@@ -70,8 +71,8 @@ public class Teris extends JFrame {
     }
 
     private void initial() {
-        data = new ArrayList<Point>();
-        speed = 1000;
+        data = new ArrayList<Cell>();
+        speed = INITIAL_SPEED;
         limitTop = row;
         sameRow = new SameRow();
 
@@ -223,7 +224,7 @@ public class Teris extends JFrame {
             e.printStackTrace();
         }
         boolean canChangeShape = !Utils.hasSamePoint(data);
-        for (Point item : shape.getData()) {
+        for (Cell item : shape.getData()) {
             if (item.x >= row || item.y >= column || item.x < 0 || item.y < 0) {
                 canChangeShape = false;
                 logger.info("can not change the shape, because will over or touch framework");
@@ -248,7 +249,7 @@ public class Teris extends JFrame {
                 updateLimitTop();
                 updateScore(); // 消方块
                 loadShape();
-                speed = 1000;
+                speed = INITIAL_SPEED;
                 time.setDelay(speed);
             } else {
                 shape.ShiftDown();
@@ -290,7 +291,7 @@ public class Teris extends JFrame {
     }
 
     private void updateLimitTop() {
-        for (Point item : data) {
+        for (Cell item : data) {
             limitTop = Math.min(limitTop, item.x);
         }
     }
@@ -299,7 +300,7 @@ public class Teris extends JFrame {
         int counter = 0;
         int collepsedRowNumber = 0;
         for (int i = row - 1; i >= 0; i--) {
-            for (Point item : data) {
+            for (Cell item : data) {
                 if (i == item.x) {
                     counter++;
                 }
@@ -317,11 +318,17 @@ public class Teris extends JFrame {
             }
             counter = 0;
         }
+        int previousScore = Integer.valueOf(score.getText());
         score.setText(String.valueOf(Integer.valueOf(score.getText()) + scoreFunction(collepsedRowNumber)));
+        int currentScore = Integer.valueOf(score.getText());
+        if (1 == currentScore / 100 - previousScore / 100) {
+            INITIAL_SPEED *= 0.9;
+            logger.info("current initial speed is:" + INITIAL_SPEED);
+        }
     }
 
     private void moveTopToBelow(int i) {
-        for (Point item : data) {
+        for (Cell item : data) {
             if (item.x < i) {
                 item.x++;
             }

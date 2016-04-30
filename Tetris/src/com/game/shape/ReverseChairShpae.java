@@ -4,12 +4,12 @@ import java.util.List;
 
 import com.game.Teris;
 import com.game.state.ShapeInterface.REVERSECHAIR;
-import com.game.util.Point;
+import com.game.util.Cell;
 
 public class ReverseChairShpae extends Shape {
     private REVERSECHAIR state;
 
-    public ReverseChairShpae(List<Point> data, int row, int column) {
+    public ReverseChairShpae(List<Cell> data, int row, int column) {
         super(data, row, column);
         state = REVERSECHAIR.HORIZONTAL;
         Teris.logger.info("ReverseChairShpae created with " + state);
@@ -17,7 +17,7 @@ public class ReverseChairShpae extends Shape {
 
     @Override
     public boolean changeShape() throws Exception {
-        Point point = data.get(2);
+        Cell point = data.get(2);
         switch (state) {
         case HORIZONTAL:
             data.get(0).setLocation(point.x, point.y + 1);

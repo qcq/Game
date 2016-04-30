@@ -4,12 +4,12 @@ import java.util.List;
 
 import com.game.Teris;
 import com.game.state.ShapeInterface.CHAIR;
-import com.game.util.Point;
+import com.game.util.Cell;
 
 public class ChairShape extends Shape {
     private CHAIR state;
 
-    public ChairShape(List<Point> data, int row, int column) {
+    public ChairShape(List<Cell> data, int row, int column) {
         super(data, row, column);
         state = CHAIR.HORIZONTAL;
         Teris.logger.info("ChairShape created with " + state);
@@ -17,7 +17,7 @@ public class ChairShape extends Shape {
 
     @Override
     public boolean changeShape() throws Exception {
-        Point point = data.get(2);
+        Cell point = data.get(2);
         switch (state) {
         case HORIZONTAL:
             data.get(0).setLocation(point.x - 1, point.y + 1);

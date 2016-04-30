@@ -37,8 +37,8 @@ public class Utils {
         }
     }
 
-    public static boolean hasSamePoint(List<Point> data) {
-        Set<Point> set = new HashSet<Point>();
+    public static boolean hasSamePoint(List<Cell> data) {
+        Set<Cell> set = new HashSet<Cell>();
         set.addAll(data);
         return set.size() != data.size();
     }

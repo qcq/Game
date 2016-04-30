@@ -4,12 +4,12 @@ import java.util.List;
 
 import com.game.Teris;
 import com.game.state.ShapeInterface.REVERSESEVEN;
-import com.game.util.Point;
+import com.game.util.Cell;
 
 public class ReverseSevenShape extends Shape {
     private REVERSESEVEN state;
 
-    public ReverseSevenShape(List<Point> data, int row, int column) {
+    public ReverseSevenShape(List<Cell> data, int row, int column) {
         super(data, row, column);
         state = REVERSESEVEN.RIGHT;
         Teris.logger.info("ReverseSevenShape created with " + state);
@@ -17,7 +17,7 @@ public class ReverseSevenShape extends Shape {
 
     @Override
     public boolean changeShape() throws Exception {
-        Point point = data.get(2);
+        Cell point = data.get(2);
         switch (state) {
         case RIGHT:
             data.get(0).setLocation(point.x, point.y + 1);
@@ -54,7 +54,7 @@ public class ReverseSevenShape extends Shape {
 
     @Override
     public boolean unChangeShape() throws Exception {
-        Point point = data.get(2);
+        Cell point = data.get(2);
         switch (state) {
         case RIGHT:
             data.get(0).setLocation(point.x, point.y - 1);

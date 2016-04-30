@@ -8,7 +8,7 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
-import com.game.util.Point;
+import com.game.util.Cell;
 
 /**
  * in this file draw the background and the moving snake.
@@ -20,14 +20,14 @@ public class TerisPanel extends JPanel {
     private static final long serialVersionUID = 1L;
     private int row;
     private int column;
-    private List<Point> data;
-    private Point basePoint;
+    private List<Cell> data;
+    private Cell basePoint;
 
     public TerisPanel() {
         this(null, 20, 10);
     }
 
-    public TerisPanel(List<Point> data, int row, int column) {
+    public TerisPanel(List<Cell> data, int row, int column) {
         if (data == null) {
             try {
                 throw new Exception("The List<Point> should not be null, which can be empty.");
@@ -40,7 +40,7 @@ public class TerisPanel extends JPanel {
         this.column = column;
     }
 
-    public void setBasePoint(Point point) {
+    public void setBasePoint(Cell point) {
         this.basePoint = point;
     }
 
@@ -73,7 +73,7 @@ public class TerisPanel extends JPanel {
         /*
          * draw the russia squre which meaningful to game.
          */
-        for (Point item : data) {
+        for (Cell item : data) {
             gg.setColor(item.color);
             gg.fillRect(x + item.y * squre, y + item.x * squre, squre, squre);
         }
