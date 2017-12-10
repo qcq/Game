@@ -53,7 +53,7 @@ public class Teris extends JFrame {
     private SameRow sameRow;
     private boolean runState;
     public static Logger logger;
-    private int INITIAL_SPEED = 800;
+    private int INITIAL_SPEED_IN_MS = 800;
 
     public Teris(String title, int row, int column) {
         super(title);
@@ -72,7 +72,7 @@ public class Teris extends JFrame {
 
     private void initial() {
         data = new ArrayList<Cell>();
-        speed = INITIAL_SPEED;
+        speed = INITIAL_SPEED_IN_MS;
         limitTop = row;
         sameRow = new SameRow();
 
@@ -249,7 +249,7 @@ public class Teris extends JFrame {
                 updateLimitTop();
                 updateScore(); // 消方块
                 loadShape();
-                speed = INITIAL_SPEED;
+                speed = INITIAL_SPEED_IN_MS;
                 time.setDelay(speed);
             } else {
                 shape.ShiftDown();
@@ -322,8 +322,8 @@ public class Teris extends JFrame {
         score.setText(String.valueOf(Integer.valueOf(score.getText()) + scoreFunction(collepsedRowNumber)));
         int currentScore = Integer.valueOf(score.getText());
         if (1 == currentScore / 100 - previousScore / 100) {
-            INITIAL_SPEED *= 0.9;
-            logger.info("current initial speed is:" + INITIAL_SPEED);
+            INITIAL_SPEED_IN_MS *= 0.9;
+            logger.info("current initial speed is:" + INITIAL_SPEED_IN_MS);
         }
     }
 

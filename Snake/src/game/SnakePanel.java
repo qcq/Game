@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JPanel;
 
@@ -16,24 +17,24 @@ public class SnakePanel extends JPanel {
      * 
      */
     private static final long serialVersionUID = 1L;
-    private ArrayList<Place> snakeBody;
+    private List<Place> snakeBody;
     private Place food;
     private int row;
     private int column;
 
-    public SnakePanel(ArrayList<Place> a) {
+    public SnakePanel(List<Place> a) {
         this.snakeBody = a;
         this.row = 20;
         this.column = 10;
     }
 
-    public SnakePanel(ArrayList<Place> snakeBody, int row, int column) {
+    public SnakePanel(List<Place> snakeBody, int row, int column) {
         this.snakeBody = snakeBody;
         this.row = row;
         this.column = column;
     }
 
-    public void setA(ArrayList<Place> snakeBody) {
+    public void setA(List<Place> snakeBody) {
         this.snakeBody = snakeBody;
     }
 

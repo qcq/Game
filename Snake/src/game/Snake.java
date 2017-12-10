@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import javax.swing.JButton;
@@ -36,7 +37,7 @@ public class Snake extends JFrame {
     private KeyAdapter keylistener;
     private Timer time;
     private Random rand;
-    private ArrayList<Place> snakeBody;
+    private List<Place> snakeBody;
     private Place food;
     private boolean caneat;
     private ActionListener timelistener;
@@ -66,7 +67,7 @@ public class Snake extends JFrame {
     }
 
     private void initial(int row, int column) {
-        snakeBody = new ArrayList<Place>();
+        snakeBody = new ArrayList<>();
         /**
          * initial the snake body! to length 3
          */
@@ -287,7 +288,7 @@ public class Snake extends JFrame {
     }
 
     public static void main(String[] args) {
-        Snake test = new Snake("test", 30, 15);
+        Snake snake = new Snake("test", 30, 15);
     }
 
 }
