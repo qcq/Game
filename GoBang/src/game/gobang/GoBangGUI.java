@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Optional;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -30,7 +31,6 @@ public class GoBangGUI extends JFrame {
     private Gobang gobang;
     private MouseAdapter mouselistener;
     private boolean flag;
-    private boolean ok;
     private ActionListener actionlistener;
 
     public GoBangGUI() {
@@ -42,7 +42,6 @@ public class GoBangGUI extends JFrame {
         this.row = row;
         this.column = column;
         this.flag = false;
-        this.ok = false;
         initial();
         setSize(600, 600);
         this.setResizable(false);
@@ -86,16 +85,16 @@ public class GoBangGUI extends JFrame {
     /*
      * 判断鼠标落入棋盘窗格的位置索引 (x, y)为当前鼠标的坐标。
      */
-    private Place judgePlace(int indexx, int indexy, int x, int y, int squre) {
+    private Optional<Place> judgePlace(int indexx, int indexy, int x, int y, int squre) {
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < column; j++) {
                 if (x >= indexx + j * squre && x <= indexx + (j + 1) * squre && y >= indexy + i * squre
                         && y <= indexy + (i + 1) * squre) {
-                    return new Place(i, j);
+                    return Optional.of(new Place(i, j));
                 }
             }
         }
-        return null;
+        return Optional.empty();
     }
 
     private void listener() {
@@ -104,25 +103,25 @@ public class GoBangGUI extends JFrame {
             public void mousePressed(MouseEvent e) {
                 int x = e.getX();
                 int y = e.getY();
+                if (start.isEnabled()) {
+                	JOptionPane.showMessageDialog(mainframe, "please start the game");
+                	return;
+                }
                 /*
                  * (25, 10) is a special coordinate. the board draw begins here,
                  * when the board added to the this JFrame the begin change to
                  * (25, 10 + 25), However, I do not know why. just keep it;
                  */
-                if (ok) {
-                    Place chessPlace = judgePlace(25, 10, x, y, board.getSqure());
-                    if (null == chessPlace) {
-                    	JOptionPane.showMessageDialog(mainframe, "The place you choose is illegal place.");
-                    	return;
-                    }
-                    // this flag used to indicate which player should be move the chess.
-                    if (flag) {
-                    	moveChess(chessPlace, GobangColor.WHITE, GobangColor.BLACK);
-                    } else {
-                    	moveChess(chessPlace, GobangColor.BLACK, GobangColor.WHITE);
-                    }
+                Optional<Place> chessPlace = judgePlace(25, 10, x, y, board.getSqure());
+                if (!chessPlace.isPresent()) {
+                	JOptionPane.showMessageDialog(mainframe, "The place you choose is illegal place.");
+                	return;
+                }
+                // this flag used to indicate which player should be move the chess.
+                if (flag) {
+                	moveChess(chessPlace.get(), GobangColor.WHITE, GobangColor.BLACK);
                 } else {
-                    JOptionPane.showMessageDialog(mainframe, "please start the game");
+                	moveChess(chessPlace.get(), GobangColor.BLACK, GobangColor.WHITE);
                 }
             }
         };
@@ -130,9 +129,12 @@ public class GoBangGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (((JButton) (e.getSource())).getText().equals("Start")) {
-                    ok = true;
-                } else if (((JButton) (e.getSource())).getText().equals("Exit")) {
+                	start.setEnabled(false);
+                    return;
+                }
+                if (((JButton) (e.getSource())).getText().equals("Exit")) {
                     System.exit(0);
+                    return;
                 }
             }
         };
@@ -148,14 +150,12 @@ public class GoBangGUI extends JFrame {
         } else {
             gobang.setChess(chessPlace.getX(), chessPlace.getY(), player);
             gobang.setChess(0, 0, nextPlayer);
-            //repaint();
             if (gobang.isSuccess(new Place(0, 0), new Place(row - 1, column - 1), player)) {
                 int choice = JOptionPane.showConfirmDialog(mainframe, "The " + player + " player is win",
-                        "DO you want try again", JOptionPane.YES_NO_OPTION);
+                        "Do you want try again.", JOptionPane.YES_NO_OPTION);
                 if (choice == JOptionPane.YES_OPTION) {
                     gobang.initial();
-                    ok = false;
-                    //repaint();
+                    start.setEnabled(true);
                 }
             }
             flag = !flag;
