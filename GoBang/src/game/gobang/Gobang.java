@@ -18,6 +18,19 @@ public class Gobang {
         this(10, 10);
         initial();
     }
+    
+    public Gobang(int row, int column) {
+        /*
+         * set the Chess squre to row * line
+         */
+        this.row = row;
+        this.column = column;
+        data = new GobangColor[row][];
+        for (int i = 0; i < row; i++) {
+            data[i] = new GobangColor[column];
+        }
+        initial();
+    }
 
     /*
      * Initial the Game
@@ -35,19 +48,6 @@ public class Gobang {
      */
     public void setChess(int row, int column, GobangColor color) {
         data[row][column] = color;
-    }
-
-    public Gobang(int row, int column) {
-        /*
-         * set the Chess squre to row * line
-         */
-        this.row = row;
-        this.column = column;
-        data = new GobangColor[row][];
-        for (int i = 0; i < row; i++) {
-            data[i] = new GobangColor[column];
-        }
-        initial();
     }
 
     public GobangColor[][] getData() {
@@ -121,9 +121,9 @@ public class Gobang {
      * 扫描棋盘看是不是有棋子获胜，可以优化扫描方案，将扫描的范围局限于一个以落子处为中心 5为半径的棋盘(isSucess的重载方法实现这一个思想)。
      */
     public boolean isSuccess(Place x, Place y, GobangColor color) {
-        boolean flag = false;
+        // boolean flag = false;
         int counter = 0;
-        label: for (int i = (int) x.getX(); i <= (int) y.getX(); i++) {
+        for (int i = (int) x.getX(); i <= (int) y.getX(); i++) {
             for (int j = (int) x.getY(); j <= (int) y.getY(); j++) {
                 /*
                  * scanning the [x,y] range in 4 directions.
@@ -139,8 +139,7 @@ public class Gobang {
                     }
                 }
                 if (5 == counter) {
-                    flag = true;
-                    break label;
+                    return true;
                 }
                 // check the vertical
                 counter = 0;
@@ -152,8 +151,7 @@ public class Gobang {
                     }
                 }
                 if (5 == counter) {
-                    flag = true;
-                    break label;
+                    return true;
 
                 }
                 // check the dig line
@@ -166,8 +164,7 @@ public class Gobang {
                     }
                 }
                 if (5 == counter) {
-                    flag = true;
-                    break label;
+                    return true;
                 }
                 // check the reverse dig line
                 counter = 0;
@@ -179,21 +176,17 @@ public class Gobang {
                     }
                 }
                 if (5 == counter) {
-                    flag = true;
-                    break label;
+                    return true;
                 }
             }
         }
-
-        return flag;
-
+        return false;
     }
 
     /*
      * 这是一个重载的方法，与上一个方法不同的是没有使用扫描来实现判定 而是基于落子的地方，来基于四个方向进行计数判断。
      */
     public boolean isSuccess(Place x, GobangColor color) {
-        boolean flag = false;
         /*
          * horizontal direction
          */
@@ -213,7 +206,7 @@ public class Gobang {
             }
         }
         if (5 == counter) {
-            flag = true;
+            return true;
         }
         /*
          * vertical direction
@@ -234,7 +227,7 @@ public class Gobang {
             }
         }
         if (5 == counter) {
-            flag = true;
+            return true;
         }
         /*
          * diagonal direction
@@ -257,7 +250,7 @@ public class Gobang {
             }
         }
         if (5 == counter) {
-            flag = true;
+            return true;
         }
         /*
          * reverse diagonal direction
@@ -280,9 +273,9 @@ public class Gobang {
             }
         }
         if (5 == counter) {
-            flag = true;
+            return true;
         }
-        return flag;
+        return false;
     }
 
     /*

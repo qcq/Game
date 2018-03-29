@@ -150,17 +150,18 @@ public class GoBangGUI extends JFrame {
         } else {
             gobang.setChess(chessPlace.getX(), chessPlace.getY(), player);
             gobang.setChess(0, 0, nextPlayer);
+            repaint();
             if (gobang.isSuccess(new Place(0, 0), new Place(row - 1, column - 1), player)) {
                 int choice = JOptionPane.showConfirmDialog(mainframe, "The " + player + " player is win",
                         "Do you want try again.", JOptionPane.YES_NO_OPTION);
                 if (choice == JOptionPane.YES_OPTION) {
                     gobang.initial();
                     start.setEnabled(true);
+                    repaint();
                 }
             }
             flag = !flag;
         }
-    	repaint();
     }
 
     public static void main(String[] args) {
