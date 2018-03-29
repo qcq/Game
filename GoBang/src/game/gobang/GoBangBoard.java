@@ -54,7 +54,7 @@ public class GoBangBoard extends JPanel {
         for (int i = 0; i < gobang.getData().length; i++) {
             for (int j = 0; j < gobang.getData()[i].length; j++) {
                 if (GobangColor.WHITE == gobang.getData()[i][j]) {
-                    gg.setColor(Color.blue);
+                    gg.setColor(Color.WHITE);
                     gg.fillOval(x + j * squre, y + i * squre, squre, squre);
                 } else if (GobangColor.BLACK == gobang.getData()[i][j]) {
                     gg.setColor(Color.BLACK);

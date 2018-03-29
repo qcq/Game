@@ -110,45 +110,16 @@ public class GoBangGUI extends JFrame {
                  * (25, 10 + 25), However, I do not know why. just keep it;
                  */
                 if (ok) {
-                    Place temp = judgePlace(25, 10, x, y, board.getSqure());
-                    System.out.println(temp);
+                    Place chessPlace = judgePlace(25, 10, x, y, board.getSqure());
+                    if (null == chessPlace) {
+                    	JOptionPane.showMessageDialog(mainframe, "The place you choose is illegal place.");
+                    	return;
+                    }
+                    // this flag used to indicate which player should be move the chess.
                     if (flag) {
-                        if (!gobang.check(temp.getX(), temp.getY())) {
-                            JOptionPane.showMessageDialog(mainframe, "Change another place");
-                        } else {
-                            gobang.setChess(temp.getX(), temp.getY(), GobangColor.WHITE);
-                            gobang.setChess(0, 0, GobangColor.BLACK);
-                            repaint();
-                            if (gobang.isSuccess(new Place(0, 0), new Place(row - 1, column - 1), GobangColor.WHITE)) {
-                                int choice = JOptionPane.showConfirmDialog(mainframe, "The blue player is win",
-                                        "DO you want try again", JOptionPane.YES_NO_OPTION);
-                                if (choice == JOptionPane.YES_OPTION) {
-                                    gobang.initial();
-                                    ok = false;
-                                    repaint();
-                                }
-                            }
-                            flag = false;
-                        }
-
+                    	moveChess(chessPlace, GobangColor.WHITE, GobangColor.BLACK);
                     } else {
-                        if (!gobang.check(temp.getX(), temp.getY())) {
-                            JOptionPane.showMessageDialog(mainframe, "Change another place");
-                        } else {
-                            gobang.setChess(temp.getX(), temp.getY(), GobangColor.BLACK);
-                            gobang.setChess(0, 0, GobangColor.WHITE);
-                            repaint();
-                            if (gobang.isSuccess(new Place(0, 0), new Place(row - 1, column - 1), GobangColor.BLACK)) {
-                                int choice = JOptionPane.showConfirmDialog(mainframe, "The black player is win",
-                                        "DO you want try again", JOptionPane.YES_NO_OPTION);
-                                if (choice == JOptionPane.YES_OPTION) {
-                                    gobang.initial();
-                                    ok = false;
-                                    repaint();
-                                }
-                            }
-                            flag = true;
-                        }
+                    	moveChess(chessPlace, GobangColor.BLACK, GobangColor.WHITE);
                     }
                 } else {
                     JOptionPane.showMessageDialog(mainframe, "please start the game");
@@ -168,6 +139,28 @@ public class GoBangGUI extends JFrame {
         board.addMouseListener(mouselistener);
         start.addActionListener(actionlistener);
         end.addActionListener(actionlistener);
+    }
+    
+    private void moveChess(Place chessPlace, GobangColor player, GobangColor nextPlayer) {
+    	if (!gobang.check(chessPlace.getX(), chessPlace.getY())) {
+            JOptionPane.showMessageDialog(mainframe, "Change another place, which is indicate which player should be move next.");
+            return;
+        } else {
+            gobang.setChess(chessPlace.getX(), chessPlace.getY(), player);
+            gobang.setChess(0, 0, nextPlayer);
+            //repaint();
+            if (gobang.isSuccess(new Place(0, 0), new Place(row - 1, column - 1), player)) {
+                int choice = JOptionPane.showConfirmDialog(mainframe, "The " + player + " player is win",
+                        "DO you want try again", JOptionPane.YES_NO_OPTION);
+                if (choice == JOptionPane.YES_OPTION) {
+                    gobang.initial();
+                    ok = false;
+                    //repaint();
+                }
+            }
+            flag = !flag;
+        }
+    	repaint();
     }
 
     public static void main(String[] args) {
